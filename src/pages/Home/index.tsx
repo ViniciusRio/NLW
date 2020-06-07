@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './assets/logo.svg';
+import logo from '../../assets/logo.svg';
 import { FiLogIn } from 'react-icons/fi';
 import { Link }from 'react-router-dom';
 
