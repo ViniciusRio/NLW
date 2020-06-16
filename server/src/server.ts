@@ -9,7 +9,9 @@ app.use(cors());
 app.use(express.json());
 app.use(routes);
 app.use('/uploads', express
-    .static(path.resolve(__dirname, 'uploads')));
+    .static(path.resolve(__dirname, 'uploads', 'items')));
+app.use('/uploads', express
+    .static(path.resolve(__dirname, 'uploads', 'points')));
 app.get('/users', (request, response) => {
     response.json({ message: 'Hello Worrld' });
 });
