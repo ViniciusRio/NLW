@@ -11,6 +11,7 @@ import './styles.css';
 import { Item } from '../../interfaces/Item';
 import { State } from '../../interfaces/State';
 import { City } from '../../interfaces/City';
+import Dropzone from '../../components/dropzone/dropzone';
 
 
 const Create = () => {
@@ -22,6 +23,8 @@ const Create = () => {
     const[ selectedUf, setSelectedUf ] = useState('0');
     const[ selectedCity, setSelectedCity ] = useState('0');
     const[ selectedItems, setSelectItems ] = useState<number[]>([]);
+    const[ selectedImage, setSelectedImage ] = useState();
+
 
     const [formData, setFormData] = useState({
         name: '',
@@ -126,23 +129,26 @@ const Create = () => {
 
     const handlerSubmit = async (event: FormEvent) => {
         event.preventDefault();
-
+          
         const { name, email, whatsapp } = formData;
         const [ latitude, longitude ] = selectedPosition;
         const city  = selectedCity;
         const uf  = selectedUf;
         const items = selectedItems;
+        
+        const data = new FormData();
 
-        const data = {
-            name,
-            email,
-            whatsapp,
-            uf,
-            city,
-            latitude,
-            longitude,
-            items
-        };
+        data.append('name', name);
+        data.append('email', email);
+        data.append('whatsapp', whatsapp);
+        data.append('uf', uf);
+        data.append('city', city);
+        data.append('latitude', String(latitude));
+        data.append('longitude', String(longitude));
+        data.append('items', items.join(','));
+        if (selectedImage) {
+            data.append('image', selectedImage!);
+        }
 
         await api.post('points', data);
 
@@ -164,6 +170,8 @@ const Create = () => {
 
             <form onSubmit={ handlerSubmit }>
                 <h1>Cadastro do ponto de coleta</h1>
+
+                <Dropzone onFileUpload={ setSelectedImage } />
                 <fieldset>
                     <legend>
                         <h2>Dados</h2>

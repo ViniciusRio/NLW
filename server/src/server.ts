@@ -3,6 +3,8 @@ import cors from 'cors';
 import routes from './routes';
 import path from 'path';
 
+import { errors } from 'celebrate';
+
 
 const app = express();
 app.use(cors());
@@ -16,5 +18,6 @@ app.get('/users', (request, response) => {
     response.json({ message: 'Hello Worrld' });
 });
 
+app.use(errors());
 
 app.listen(3333);

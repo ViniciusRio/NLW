@@ -1,6 +1,7 @@
 export interface PointDetails {
     point: {
         image: string,
+        image_url: string,
         name: string,
         email: string,
         whatsapp: string

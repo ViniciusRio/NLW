@@ -58,7 +58,6 @@ class PointController {
 
         const point_id = insertedPointsId[0];
 
-
         const pointsItems = items
             .split(',')
             .map((item: string) => Number(item.trim()))
